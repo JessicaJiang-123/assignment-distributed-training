@@ -43,7 +43,10 @@ def split_data(
 
     """TODO: Your code here"""
 
-    # Try to get the correct start_idx and end_idx from dp_size, mp_size and rank and return
-    # the corresponding data
+    dp_index = rank // mp_size
+    data_num = x_train.shape[0]
+    split_size = data_num // dp_size
+    start_idx = dp_index * split_size
+    end_idx = start_idx + split_size
 
-    raise NotImplementedError
+    return x_train[start_idx:end_idx], y_train[start_idx:end_idx]
